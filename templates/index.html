@@ -1,31 +1,72 @@
 <!doctype html>
 <html>
 <head>
-    <title>Crop Image</title>
+    <title>UAS Komgraf 1</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css">
     <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+        }
+
         .col {
-            border: 1px solid #ddd;
+            border: 1px solid #555;
             padding: 15px;
             border-radius: 5px;
+            background-color: #222;
+            margin-top: 15px;
+        }
+
+        h1, h2, label {
+            color: #fff;
+        }
+
+        .form-control, .form-select {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        #croppedResult {
+            border-color: #555;
+            background-color: #222;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .download-btn {
+            margin-right: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container py-5">
-        <h1 class="mb-4">Crop Image</h1>
+        <h1 class="mb-4">UAS Komputer Grafik 1</h1>
         <div class="row">
-            <div class="col-md-6">
                 <div class="col">
-                    <h2>Select Image</h2>
+                    <h2>Select Image to Upload</h2>
                     <form id="cropForm" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="file" class="form-label">Select image:</label>
                             <input type="file" name="file" id="file" class="form-control-file" onchange="previewImage(event)">
                         </div>
                         <div class="mb-3" id="imagePreview"></div>
+                        <div class="mb-3" id="sizeInput" style="display: none;">
+                            <label for="size" class="form-label">Size (pixels)</label>
+                            <input type="number" name="size" id="size" class="form-control" min="1" required>
+                        </div>
                         <div class="mb-3" id="cropOptions" style="display: none;">
-                            <label for="position" class="form-label">Crop position:</label>
+                            <label for="position" class="form-label">Position</label>
                             <select name="position" id="position" class="form-select">
                                 <option value="top_left">Top Left</option>
                                 <option value="top_center">Top Center</option>
@@ -38,22 +79,20 @@
                                 <option value="bottom_right">Bottom Right</option>
                             </select>
                         </div>
-                        <div class="mb-3" id="sizeInput" style="display: none;">
-                            <label for="size" class="form-label">Crop size:</label>
-                            <input type="number" name="size" id="size" class="form-control" min="1" value="100">
-                        </div>
-                        <button type="button" class="btn btn-primary" onclick="cropImage()">Crop</button>
+                        <button type="button" class="btn btn-primary" onclick="cropImage()" id="cropButton" style="display: none;">Crop</button>
+
+                        <!-- <button type="button" class="btn btn-primary" onclick="cropImage()">Crop</button> -->
                     </form>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="col">
-                    <h2>Cropped Result</h2>
-                    <div id="croppedImage"></div>
-                    <div class="d-flex justify-content-around mt-4">
-                        <button class="btn btn-primary download-btn" id="downloadMarkdownBtn" onclick="saveAsMarkdown()" style="display: none;">Download Markdown</button>
-                        <button class="btn btn-primary download-btn" id="downloadImageBtn" onclick="saveAsImage()" style="display: none;">Download Cropped Image</button>
-                    </div>
+        </div>
+        <div class="row">
+            <div class="col" id="croppedResult" style="display: none;">
+                <h2>Cropped Output</h2>
+                <div id="croppedImage"></div>
+                <div class="d-flex justify-content-around mt-4">
+                    <!-- <button class="btn btn-primary download-btn" id="downloadMarkdownBtn" onclick="saveAsMarkdown()" style="display: none;">Download Markdown</button> -->
+                    <button class="btn btn-primary download-btn" id="downloadImageBtn" onclick="saveAsImage()">Download Cropped Image</button>
+                    <button class="btn btn-primary download-btn" id="resetButton" onclick="resetForm()">Reset</button>
                 </div>
             </div>
         </div>
@@ -72,6 +111,9 @@
                 document.getElementById("cropOptions").style.display = "block";
                 document.getElementById("sizeInput").style.display = "block";
                 document.getElementById("size").max = Math.min(imgElement.naturalWidth, imgElement.naturalHeight);
+
+                // Menampilkan tombol "Crop"
+                document.getElementById("cropButton").style.display = "inline-block";
             }
             reader.readAsDataURL(event.target.files[0]);
         }
@@ -105,9 +147,11 @@
                 }
             };
             xhr.send(formData);
+            
+            document.getElementById("croppedResult").style.display = "block";
         }
 
-        function saveAsMarkdown() {
+/*        function saveAsMarkdown() {
             var fileName = "crop_image.md";
             var markdownContent = `# Crop Image
 ## Selected Image:
@@ -127,6 +171,23 @@
             element.click();
             document.body.removeChild(element);
         }
+*/
+
+        function hideCropButton() {
+            document.getElementById("cropButton").style.display = "none";
+        }
+
+        function resetForm() {
+            document.getElementById("cropForm").reset();
+            document.getElementById("imagePreview").innerHTML = "";
+            document.getElementById("sizeInput").style.display = "none";
+            document.getElementById("cropOptions").style.display = "none";
+            hideCropButton();
+            document.getElementById("croppedResult").style.display = "none";
+            document.getElementById("downloadImageBtn").style.display = "inline-block";
+        }
+
+
 
         function saveAsImage() {
             var fileName = "cropped_image.jpg";
