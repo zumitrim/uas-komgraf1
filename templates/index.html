@@ -21,9 +21,33 @@
             color: #fff;
         }
 
+        h1 {
+            text-align: center;
+        }
+
         .form-control, .form-select {
             background-color: #333;
             color: #fff;
+        }
+
+        .footer {
+            background-color: #212529;
+            padding: 20px;
+            text-align: center;
+            margin: 0;
+            color: #fff;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            opacity: 0.8;
+        }
+
+        .footer a:hover {
+            opacity: 1;
         }
 
         .btn-primary {
@@ -51,13 +75,12 @@
 </head>
 <body>
     <div class="container py-5">
-        <h1 class="mb-4">UAS Komputer Grafik 1</h1>
+        <h1 class="mb-4">UAS Komputer Grafik 1 | Upload & Crop Image</h1>
         <div class="row">
                 <div class="col">
                     <h2>Select Image to Upload</h2>
                     <form id="cropForm" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label for="file" class="form-label">Select image:</label>
                             <input type="file" name="file" id="file" class="form-control-file" onchange="previewImage(event)">
                         </div>
                         <div class="mb-3" id="imagePreview"></div>
@@ -80,8 +103,6 @@
                             </select>
                         </div>
                         <button type="button" class="btn btn-primary" onclick="cropImage()" id="cropButton" style="display: none;">Crop</button>
-
-                        <!-- <button type="button" class="btn btn-primary" onclick="cropImage()">Crop</button> -->
                     </form>
                 </div>
         </div>
@@ -90,12 +111,14 @@
                 <h2>Cropped Output</h2>
                 <div id="croppedImage"></div>
                 <div class="d-flex justify-content-around mt-4">
-                    <!-- <button class="btn btn-primary download-btn" id="downloadMarkdownBtn" onclick="saveAsMarkdown()" style="display: none;">Download Markdown</button> -->
                     <button class="btn btn-primary download-btn" id="downloadImageBtn" onclick="saveAsImage()">Download Cropped Image</button>
                     <button class="btn btn-primary download-btn" id="resetButton" onclick="resetForm()">Reset</button>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="footer">
+        <p>&copy; 2023 UAS Komputer Grafik 1. All rights reserved. | Designed by <a href="https://github.com/zumitrim" target="_blank">Zulfahmi Trimahardika</a></p>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
@@ -151,28 +174,6 @@
             document.getElementById("croppedResult").style.display = "block";
         }
 
-/*        function saveAsMarkdown() {
-            var fileName = "crop_image.md";
-            var markdownContent = `# Crop Image
-## Selected Image:
-![Selected Image](data:image/jpeg;base64,${getImageBase64("imagePreview")})
-## Crop Position:
-- ${document.getElementById("position").value}
-## Crop Size:
-- ${document.getElementById("size").value}
-## Cropped Image:
-![Cropped Image](data:image/jpeg;base64,${getImageBase64("croppedImage")})`;
-
-            var element = document.createElement('a');
-            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(markdownContent));
-            element.setAttribute('download', fileName);
-            element.style.display = 'none';
-            document.body.appendChild(element);
-            element.click();
-            document.body.removeChild(element);
-        }
-*/
-
         function hideCropButton() {
             document.getElementById("cropButton").style.display = "none";
         }
@@ -186,8 +187,6 @@
             document.getElementById("croppedResult").style.display = "none";
             document.getElementById("downloadImageBtn").style.display = "inline-block";
         }
-
-
 
         function saveAsImage() {
             var fileName = "cropped_image.jpg";
