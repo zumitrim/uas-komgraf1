@@ -1,5 +1,7 @@
 # UAS Komputer Grafik 1
 
+https://zumitrim.pythonanywhere.com/
+
 Nama  : Zulfahmi Trimahardika
 
 NIM   : 201011400434
