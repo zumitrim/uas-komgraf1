@@ -18,7 +18,7 @@ def crop_by_position(img, position, size):
         'bottom_center': img[height - size:height, width // 2 - size // 2:width // 2 + size // 2],
         'bottom_right': img[height - size:height, width - size:width],
     }[position]
-
+    
 def crop_image(img, position, size):
     cropped_img = crop_by_position(img, position, size)
     _, buffer = cv2.imencode('.jpg', cropped_img)
