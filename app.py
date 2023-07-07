@@ -1,10 +1,9 @@
-from flask import Flask, flash, request, redirect, url_for, render_template
+from flask import Flask, request, render_template, jsonify
 import cv2
 import numpy as np
 import base64
-import io
 
-flask = Flask(__name__)
+app = Flask(__name__)
 
 def crop_by_position(img, position, size):
     height, width = img.shape[:2]
@@ -26,7 +25,7 @@ def crop_image(img, position, size):
     cropped_bytes = base64.b64encode(buffer)
     return cropped_bytes
 
-@flask.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
         return render_template('index.html')
@@ -46,9 +45,8 @@ def index():
         cropped_bytes = crop_image(img, position, size)
         return cropped_bytes
 
-
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'png', 'jpg', 'jpeg'}
 
 if __name__ == '__main__':
-    flask.run()
+    app.run()
