@@ -27,5 +27,5 @@ Setelah gambar diupload, akan langsung ditampilkan dan muncul form Size dan Posi
 Jika sudah, akan ditampilkan hasil crop gambarnya.
 Klik "Download Cropped Image" untuk mendownload gambar yang telah dicrop. Klik "Reset" untuk kembali ke halaman utama.
 
-Note: biasanya gambar yang dicrop akan sedikit membutuhkan waktu untuk menampilkannya, jadi bersabar sedikit ya:)
+Note: biasanya gambar yang dicrop akan sedikit membutuhkan waktu untuk menampilkannya tergantung size nya, jadi bersabar sedikit ya:)
 ![image](https://github.com/zumitrim/uas-komgraf1/assets/53569950/16b436df-f59e-4913-805b-4de7991c9626)
