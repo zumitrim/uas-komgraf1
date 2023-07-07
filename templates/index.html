@@ -77,34 +77,34 @@
     <div class="container py-5">
         <h1 class="mb-4">UAS Komputer Grafik 1 | Upload & Crop Image</h1>
         <div class="row">
-                <div class="col">
-                    <h2>Select Image to Upload</h2>
-                    <form id="cropForm" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <input type="file" name="file" id="file" class="form-control-file" onchange="previewImage(event)">
-                        </div>
-                        <div class="mb-3" id="imagePreview"></div>
-                        <div class="mb-3" id="sizeInput" style="display: none;">
-                            <label for="size" class="form-label">Size (pixels)</label>
-                            <input type="number" name="size" id="size" class="form-control" min="1" required>
-                        </div>
-                        <div class="mb-3" id="cropOptions" style="display: none;">
-                            <label for="position" class="form-label">Position</label>
-                            <select name="position" id="position" class="form-select">
-                                <option value="top_left">Top Left</option>
-                                <option value="top_center">Top Center</option>
-                                <option value="top_right">Top Right</option>
-                                <option value="center_left">Center Left</option>
-                                <option value="center">Center</option>
-                                <option value="center_right">Center Right</option>
-                                <option value="bottom_left">Bottom Left</option>
-                                <option value="bottom_center">Bottom Center</option>
-                                <option value="bottom_right">Bottom Right</option>
-                            </select>
-                        </div>
-                        <button type="button" class="btn btn-primary" onclick="cropImage()" id="cropButton" style="display: none;">Crop</button>
-                    </form>
-                </div>
+            <div class="col">
+                <h2>Select Image to Upload</h2>
+                <form id="cropForm" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <input type="file" name="file" id="file" class="form-control-file" onchange="previewImage(event)">
+                    </div>
+                    <div class="mb-3" id="imagePreview"></div>
+                    <div class="mb-3" id="sizeInput" style="display: none;">
+                        <label for="size" class="form-label">Size (pixels)</label>
+                        <input type="number" name="size" id="size" class="form-control" min="1" required>
+                    </div>
+                    <div class="mb-3" id="cropOptions" style="display: none;">
+                        <label for="position" class="form-label">Position</label>
+                        <select name="position" id="position" class="form-select">
+                            <option value="top_left">Top Left</option>
+                            <option value="top_center">Top Center</option>
+                            <option value="top_right">Top Right</option>
+                            <option value="center_left">Center Left</option>
+                            <option value="center">Center</option>
+                            <option value="center_right">Center Right</option>
+                            <option value="bottom_left">Bottom Left</option>
+                            <option value="bottom_center">Bottom Center</option>
+                            <option value="bottom_right">Bottom Right</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="cropImage()" id="cropButton" style="display: none;">Crop</button>
+                </form>
+            </div>
         </div>
         <div class="row">
             <div class="col" id="croppedResult" style="display: none;">
